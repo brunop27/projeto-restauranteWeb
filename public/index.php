@@ -1,7 +1,9 @@
 <?php
-use Core\Request;
 
+require_once('../app/application.php');
+use Core\View;
 
-require_once '../app/application.php';
+$tela = new View('','../app/Templates/main.php');
+$tela->show();
 
-Request::getInstance()->getAction()->run();
+?>
