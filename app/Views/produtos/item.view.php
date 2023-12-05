@@ -14,9 +14,6 @@
             </div>
             <div class="card-body">
                 Tela de Produtos <?=$nome?>
-                <p>
-                    Valor: <?=$valor?>
-                </p>
             </div>
             <div class="card-footer">
                 Footer

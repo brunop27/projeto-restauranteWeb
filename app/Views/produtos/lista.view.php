@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Produtos <?=$id?></h3>
+                <h3 class="card-title">Produtos</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="">
                         <i class="fas fa-minus"></i>
@@ -14,9 +14,6 @@
             </div>
             <div class="card-body">
                 Tela de Produtos <?=$nome?>
-                <p>
-                    Valor: <?=$valor?>
-                </p>
             </div>
             <div class="card-footer">
                 Footer
