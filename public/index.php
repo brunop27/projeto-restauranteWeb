@@ -1,9 +1,9 @@
 <?php
 
 require_once('../app/application.php');
-use Core\View;
+use Controllers\Home;
 
-$tela = new View('','../app/Templates/main.php');
-$tela->show();
-
+// $controller = new Home();
+// $controller -> index();
+echo $_GET['url'];
 ?>
