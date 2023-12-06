@@ -25,3 +25,12 @@ if($router){
 }else{
     die('Page 404');
 }
+
+
+// $router = Router::getRouterByController(\Controllers\Produtos::class, 'produto','GET',[5,'água mineral']);
+
+// if($router){
+//     pre($router->getUrl());
+// }
+
+// pre($router);

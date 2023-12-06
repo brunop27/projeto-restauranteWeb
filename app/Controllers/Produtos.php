@@ -20,5 +20,3 @@ class Produtos extends Controller {
         $view->show();
     }
 }
-
-// Montando expressão regular para entender parametros de buscas
