@@ -2,5 +2,7 @@
 // Responsavel pela inicialização do sistema
 
 require_once('Configs/constantes.php');
-require_once(COMPOSER_PATH.'/autoload.php');
-require_once('configs/routers.php');
+require_once('Core/helpers.php');
+require_once(COMPOSER_PATH . '/autoload.php');
+require_once('Configs/routers.php');
+

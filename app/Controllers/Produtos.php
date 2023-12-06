@@ -8,15 +8,17 @@ class Produtos extends Controller {
     public function index() {   
         $view = new View('produtos.lista');
         $view->nome = 'x-salada';
-        $view->valor= 55.50;
+        $view->valor = 55.50;
         $view->show();
     }
 
-    public function produto($id = 0) {
+    public function produto($id = 0, $nome = 'Bruno') {
         $view = new View('produtos.item');
-        $view->nome = 'x-salada';
+        $view->nome = $nome;
         $view->valor = 22.50;
         $view->id = $id;
         $view->show();
     }
 }
+
+// Montando expressão regular para entender parametros de buscas
