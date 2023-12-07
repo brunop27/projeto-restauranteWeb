@@ -1,12 +1,7 @@
 <?php
 require_once('../app/application.php');
-use Controllers\Home;
-use Core\Router;
 
-$router = Router::getRouterByController(\Controllers\Produtos::class, 'produto','GET',[5,'Água Mineral']);
-
-if($router){
-    pre(APPLICATION_URL.'/'.$router->getUrl());
-}
-
-pre($router);
+// pre(Configs::getConfig('testes.0.id'));
+// pre(Configs::getConfig('testes.0.id'));
+// pre(Configs::getConfig('testes.1.nome'));
+// pre(Configs::getConfig('testes.1.nome'));
