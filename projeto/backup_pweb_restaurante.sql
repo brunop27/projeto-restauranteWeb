@@ -251,7 +251,7 @@ INSERT INTO `atendimentos` (`id`, `pessoas_id`, `mesa`, `pagamento_data`, `valor
 -- Estrutura da tabela `cofigs`
 --
 
-CREATE TABLE `cofigs` (
+CREATE TABLE `configs` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) NOT NULL,
   `value` varchar(100) NOT NULL,

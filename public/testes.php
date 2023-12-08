@@ -1,14 +1,12 @@
 <?php
 
+use Models\Config as Mconfig;
+use Models\Produto;
+
 require_once('../app/application.php');
-use Core\Connection;
 
-$conn = Connection::getInstance();
-
-$stm = $conn->prepare('SHOW TABLES');
-$stm->execute();
-pre($stm->fetchAll());
-
+$model = new Mconfig();
+pre($model->all());
 // pre(Configs::getConfig('testes.0.id'));
 // pre(Configs::getConfig('testes.0.id'));
 // pre(Configs::getConfig('testes.1.nome'));

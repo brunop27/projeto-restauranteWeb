@@ -1,10 +1,9 @@
-<?php
-
+<?php   
 
 namespace Models;
 use Core\Model;
 
 class Config extends Model{
-    protected $table = 'cofigs';
-    protected $columns = ['id','name','value'];
+    protected $table = 'configs';
+    protected $columns = ['id', 'name', 'value', 'criacao_data', 'alteracao_data', 'exclusao_data'];
 }
