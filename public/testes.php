@@ -5,9 +5,16 @@ use Models\Produto;
 
 require_once('../app/application.php');
 
-$config= new Mconfig(3);
+$config= new Mconfig();
+// $config->save(['name'=>'Estudante Jr','value'=>'Bruno pinheiro']);
 
-echo $config->name ." = ".$config->value;
+all($config->where('value','like','Bruno%'));
+function all($model){
+    $configs = $model-> all();
+    array_walk($configs, function($config){
+        echo $config->id." | ".$config->name . " | ".$config->value. "<hr>";
+    });
+}
 
 // $config->insert(['alteracao_data' => date('Y-m-d H:i:s')]);
 // pre($config->insert());

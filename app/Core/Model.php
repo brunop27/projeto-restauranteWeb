@@ -7,10 +7,10 @@ abstract class Model{
     protected $table;
     protected $columns = [];
     private $where = [];
-    protected $__data = [];
-
+    private $__data = [];
     protected $pk = 'id';
 
+    private $__storage = false;
     public function __construct($id = null){
         if(isset($id)){
             $this->load($id);
@@ -41,15 +41,15 @@ abstract class Model{
         $result = $stm->fetch(\PDO::FETCH_ASSOC);
         if($result){
             $this->__data = $result;
+            $this->__storage = true;
         }
     }
 
     /**
      *  Insere no Banco de Dados
-     * @return int
+     * @return self
     */
-    public function insert(array $data = []){
-        $data = array_merge($this->__data, $data);
+    private function insert(array $data){
         $columns = implode(', ', array_keys($data));
         $values = implode(', :',array_keys($data));
         $sql = "INSERT INTO $this->table ($columns) values (:$values);";
@@ -59,9 +59,10 @@ abstract class Model{
         $id = $this->getLastInsertId();
         $pk = $this->pk;
         $this->__data = $data;
+        $this->__storage = true;
         $this->$pk = $id;
 
-        return $id;
+        return $this;
     }
     
     //Serve de porta para acesso ao query
@@ -69,26 +70,63 @@ abstract class Model{
         $conn = connection::getInstance();
         return $conn->lastInsertId($this->table);   
     }
-    public function update(){
+    private function update(array $data){
+        $sql = "UPDATE $this->table SET";
+        $comma = '';
 
+        foreach($data as $key => $value){
+            $sql .= "$comma $key = :$key";
+            $comma = ',';
+        }
+
+        $sql .= " WHERE $this->pk = :w0";
+
+        $this->query($sql, array_merge($data,['w0'=>$this->{$this->pk}]));
+        $this->__data = $data;
+        return $this;
     }
-    public function delete(){
 
+    public function save(array $data = []){
+        $data = array_merge($this->__data, $data);
+
+        if($this->__storage){
+            return $this->update($data);
+        }else{
+            return $this->insert($data);
+        }
+    }
+
+    public function delete(){
+        if($this->__storage){
+           $sql = "DELETE FROM $this->table WHERE $this->pk = :$this->pk;";
+           $this->query($sql, [$this->pk => $this->{$this->pk}]);
+           $this->__storage = false;
+           return true;
+        }   
+        return false;
     }
 
     private function select(){
         $columns = implode(', ',$this->columns);
-        [$where,$data] = $this->flushWhere();
+        [$where, $data] = $this->flushWhere();
         $sql = "SELECT $columns FROM $this->table$where;";
 
         return $this->query($sql,$data);
     }
 
     public function all(){
-        return $this->select()->fetchAll(\PDO::FETCH_CLASS, get_class($this));
+        $result = $this->select()->fetchAll(\PDO::FETCH_CLASS,get_class($this));
+        array_walk($result, function(&$obj) {
+            $obj -> __storage = true;
+        });
+        return $result;
     }
     public function get(){
-        return $this->select()->fetchObject(get_class($this));
+        $result = $this->select()->fetchObject(get_class($this));
+        if($result){
+            $result->__storage = true;
+        }
+        return $result;
     }
 
     public function where($column,$comparison, $value){
@@ -106,9 +144,9 @@ abstract class Model{
 
         if(count($this->where)>0){
             $this->where[0][0] = 'WHERE';
-            foreach($this->where as $w){
-                $where .= " $w[0] $w[1] $w[2] :$w[1]";
-                $data[$w[1]] = $w[3]; 
+            foreach($this->where as $key => $w){
+                $where .= " $w[0] $w[1] $w[2] :w$key";
+                $data["w$key"] = $w[3]; 
             }
             $this->where = [];
         }
