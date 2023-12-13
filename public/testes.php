@@ -7,8 +7,13 @@ require_once('../app/application.php');
 
 $model = new Produto(1);
 // $model->save(['name'=>'Root_User','value'=>'Bruno']);
-$model->delete();
-all($model);
+// $model->delete();
+
+// $model->valor_un = 10;
+// $model->save();
+
+pre($model->getData());
+// all($model);
 
 function all($model){
     $configs = $model-> all();

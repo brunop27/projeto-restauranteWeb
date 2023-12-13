@@ -11,9 +11,14 @@ abstract class Model{
     protected $pk = 'id';
     private $__storage = false;
     protected $__protected_delete = false;
+    private $__protected_delete_column = 'exclusao_data';    
+    protected $__audit_date = false;
+    private $__audit_date_column = ['create'=> 'criacao_data', 'alter'=>'alteracao_data'];
     
-    private $__protected_delete_column = 'exclusao_data';
     public function __construct($id = null){
+        if($this->__audit_date){
+            $this->columns = array_merge($this->columns,array_values($this->__audit_date_column));
+        }
         if(isset($id)){
             $this->load($id);
         }
@@ -46,7 +51,6 @@ abstract class Model{
             $this->__storage = true;
         }
     }
-
     /**
      *  Insere no Banco de Dados
      * @return self
@@ -66,13 +70,15 @@ abstract class Model{
 
         return $this;
     }
-    
     //Serve de porta para acesso ao query
     public function getLastInsertId(){
         $conn = connection::getInstance();
         return $conn->lastInsertId($this->table);   
     }
     private function update(array $data){
+        if($this->__audit_date){
+            $data[$this->__audit_date_column['alter']] = Date('Y-m-d H:i:s');
+        }
         $sql = "UPDATE $this->table SET";
         $comma = '';
 
@@ -169,5 +175,9 @@ abstract class Model{
             $where = " WHERE $where";
         }
         return [$where, $data];
+    }
+
+    public function getData(){
+        return $this->__data;
     }
 }
