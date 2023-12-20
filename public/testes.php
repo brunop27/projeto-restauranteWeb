@@ -1,26 +1,28 @@
 <?php
 
-use Models\Config as Mconfig;
-use Models\Produto;
-
 require_once('../app/application.php');
+use Models\Config as Mconfig;
+// use Models\Produto;
 
-$model = new Produto(1);
+
+pre((new Mconfig())->all());
+// $model = new Produto(1);
+
 // $model->save(['name'=>'Root_User','value'=>'Bruno']);
 // $model->delete();
 
 // $model->valor_un = 10;
 // $model->save();
 
-pre($model->getData());
-// all($model);
+// pre($model->getData());
+// // all($model);
 
-function all($model){
-    $configs = $model-> all();
-    array_walk($configs, function($config){
-        echo $config->id." | ".$config->nome . " | ".$config->valor_un. "<hr>";
-    });
-}
+// function all($model){
+//     $configs = $model-> all();
+//     array_walk($configs, function($config){
+//         echo $config->id." | ".$config->nome . " | ".$config->valor_un. "<hr>";
+//     });
+// }
 
 // $config->insert(['alteracao_data' => date('Y-m-d H:i:s')]);
 // pre($config->insert());

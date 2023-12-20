@@ -3,23 +3,14 @@
 
 //Armazena a pasta da aplicação, verificando se a mesma foi definida, se não ela define
 defined('APPLICATION_PATH') || define('APPLICATION_PATH', realpath(__DIR__.'/../..'));
-
-//Testa qual a sitaução do sistem
-defined('APPLICATION_ENV') || define('APPLICATION_ENV', 'development');
-
-// Armazena a URL da aplicação
-defined('APPLCATION_URL') || define('APPLICATION_URL','http://restaurante.localhost');
-
-
-defined('ADMIN_LTE') || define('ADMIN_LTE',APPLICATION_URL.'/adminlte');
-
+//Pasta do projeto, onde se localiza "Tudo" gerenciada pelo framework
 defined('APP_PATH') || define('APP_PATH', APPLICATION_PATH.'/app');
 defined('VIEWS_PATH') || define('VIEWS_PATH', APP_PATH.'/Views');
 defined('TEMPLATES_PATH') || define('TEMPLATES_PATH', APP_PATH.'/Templates');
-
-defined('TEMPLATE_DEFAULT') || define('TEMPLATE_DEFAULT', 'MAIN');
+//Onde fica os repositorios no computador/projeto
 defined('COMPOSER_PATH') || define('COMPOSER_PATH', APPLICATION_PATH."/vendor");
 defined('CONFIGS_PATH') || define('CONFIGS_PATH', APP_PATH."/Configs");
+defined('CONFIGS_DB') || define('CONFIGS_DB', 'config');
 
 
 ?>
