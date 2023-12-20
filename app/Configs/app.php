@@ -11,3 +11,4 @@ defined('TEMPLATE_DEFAULT') || define('TEMPLATE_DEFAULT', 'main');
 
 defined('APPLICATION_NAME') || define('APPLICATION_NAME','sistema');
 
+defined('APPLICATION_LANGUAGE') || define('APPLICATION_LANGUAGE','pt-br');
