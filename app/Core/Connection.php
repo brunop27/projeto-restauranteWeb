@@ -2,18 +2,18 @@
 namespace Core;
 use \PDO;
 class Connection{
-    private static $conection;
+    private static $connection;
     private function __construct(){}
 
     public static function getInstance(){
-        if(!isset(self::$conection)){
+        if(!isset(self::$connection)){
             $database = Configs::getConfig("database");
             $dns = "{$database['driver']}:host={$database['host']};port={$database['port']};dbname={$database['database']}";
 
             $parameters = self::{$database['driver']}();
 
             try{
-                self::$conection = new PDO($dns,$database['user'],$database['password'],$parameters);
+                self::$connection = new PDO($dns,$database['user'],$database['password'],$parameters);
             } catch(\PDOException $e) {
                 if(APPLICATION_ENV == 'production'){
                     die('erro 500');
@@ -21,7 +21,7 @@ class Connection{
                 throw $e;
             }
     }
-        return self::$conection;
+        return self::$connection;
     }
 
     private static function mysql(){

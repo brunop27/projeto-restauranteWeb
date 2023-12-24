@@ -12,8 +12,8 @@ class Configs{
         $parameters = explode('.', $file_name);
         
         $file_name = array_shift($parameters);
-        if(!array_key_exists($file_name, self::$configs)){
-            self::$configs[$file_name] = require(CONFIGS_PATH."/$file_name.php");
+        if(!array_key_exists($file_name,self::$configs)){
+            self::$configs[$file_name] = require(CONFIGS_PATH. "/$file_name.php");
         }
         
         $configs = self::$configs[$file_name];
@@ -34,10 +34,10 @@ class Configs{
      *@return void
      */
     public static function createConfigsDB(){
-        if(defined(CONFIGS_DB)){
+        if(defined('CONFIGS_DB')){
            $model = "\\Models\\".CONFIGS_DB;
             $configs = new $model();
-            foreach($configs ->all() as $config){
+            foreach($configs->all() as $config){
                 defined($config->name) || define($config->name, $config->value);
             }
         }

@@ -23,7 +23,7 @@ class Router{
 
     private function __construct($url,$controller,$action,$method){
         
-        $this->url = (substr($url,0,1) == '/')?substr_replace($url,'',0,1):$url;
+        $this->url = (substr($url,0,1) == '/') ? substr_replace($url,'',0, 1):$url;
         $this->controller = $controller;
         $this->action = $action;
         $this->method = $method;
@@ -104,7 +104,7 @@ class Router{
     public function getUrl(){
         $url = $this->url;
         foreach($this->params as $var => $param){
-            $url = str_replace("{{$var}}",urlencode($param),$url);
+            $url = str_replace("{{$var}}",urlencode($param), $url);
         }
         return $url;
     }

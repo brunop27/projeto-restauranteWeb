@@ -3,21 +3,24 @@
 namespace Core;
 
 abstract class Model{
-    //Nome da tabela no banco de dados
+    /**
+     * Nome da tabela no banco de dados
+     * @var
+    */
     protected $table;
     protected $columns = [];
-    private $where = [];
     private $__data = [];
+    private $where = [];
     protected $pk = 'id';
     private $__storage = false;
     protected $__protected_delete = false;
     private $__protected_delete_column = 'exclusao_data';    
     protected $__audit_date = false;
-    private $__audit_date_column = ['create'=> 'criacao_data', 'alter'=>'alteracao_data'];
+    private $__audit_date_columns = ['create'=> 'criacao_data', 'alter'=>'alteracao_data'];
     
     public function __construct($id = null){
         if($this->__audit_date){
-            $this->columns = array_merge($this->columns,array_values($this->__audit_date_column));
+            $this->columns = array_merge($this->columns,array_values($this->__audit_date_columns));
         }
         if(isset($id)){
             $this->load($id);
@@ -41,6 +44,7 @@ abstract class Model{
         $stm->execute($data);
         return $stm;
     }
+
 
     private function load($id){
         $this->where($this->pk, '=', $id);
@@ -72,12 +76,12 @@ abstract class Model{
     }
     //Serve de porta para acesso ao query
     public function getLastInsertId(){
-        $conn = connection::getInstance();
+        $conn = Connection::getInstance();
         return $conn->lastInsertId($this->table);   
     }
     private function update(array $data){
         if($this->__audit_date){
-            $data[$this->__audit_date_column['alter']] = Date('Y-m-d H:i:s');
+            $data[$this->__audit_date_columns['alter']] = Date('Y-m-d H:i:s');
         }
         $sql = "UPDATE $this->table SET";
         $comma = '';
