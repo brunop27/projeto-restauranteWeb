@@ -6,7 +6,7 @@
           <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Página não encontrada.</h3>
 
           <p>
-            Nós não conseguimos encontrar a página que você está procurando. Contudo, você pode clicar <a href="<?=action(Controllers\Home::class)?>">aqui e voltar a tela inicial </a>
+            Nós não conseguimos encontrar a página que você está procurando. Contudo, você pode clicar <a href="<?=action(\Controllers\Home::class)?>">aqui e voltar a tela inicial.</a>
           </p>
         </div>
         <!-- /.error-content -->

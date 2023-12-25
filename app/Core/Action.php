@@ -13,7 +13,7 @@ class Action{
     //Verifica se tem uma rota, se tiver, retorna url solicitada
     public function getUrl(){
         if($this->router){
-            return APPLICATION_URL . "/" .$this->router->getUrl();
+            return APPLICATION_URL .$this->router->getUrl();
         }
         throw new \Exception('Action sem rota não gera URL');
     }
@@ -22,8 +22,8 @@ class Action{
         return $this->getUrl();
     }
 
-    public static function createActionByUrl($url){
-        $router = Router::getRouterByUrl($url);
+    public static function createActionByUrl($url, $method = "GET"){
+        $router = Router::getRouterByUrl($url, $method);
         $action = new Action();
         $action->router = $router;
         return $action;
@@ -37,7 +37,13 @@ class Action{
                     new $controller,
                     $this->router->getAction()
                 ],
-                array_values($this->router->getParameters()));
+                array_merge(
+                    array_values($this->router->getParameters())
+                    ,[
+                        Request::getInstance()
+                    ]
+                    ,)
+                );
                 return;
         }
         if(defined('PAGE_404')){

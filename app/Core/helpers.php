@@ -12,6 +12,6 @@ if(!function_exists('pre')){
 
 if(!function_exists('action')){
     function action($controller, $action='index', $method="GET", $parameters=[]){
-        return new Action($controller,$action,$method,$parameters);
+        return new Action($controller, $action, $method, $parameters);
     }
 }
