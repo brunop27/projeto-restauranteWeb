@@ -1,20 +1,20 @@
 <?php
 
 namespace Controllers;
-use Core\Styles;
-use Core\Scripts;
+// use Core\Styles;
+// use Core\Scripts;
 use Core\Controller;
 use Core\View;
 class ErrorController extends Controller{
-    public function Page404(){
+    public function page404(){
         $view = new View("page404", "blank");
         $view->setTitle("Erro 404");
-        // Styles::addStyle("body{background-color:#808080;color: white;}");
+        // Styles::addStyle("section{color: black;}");
         //Scripts::addScript("alert('Testando')");
         $view->show();
     }
     
-    public function Page500(){
+    public function page500(){
         $view = new View ("page500","blank");
         $view->setTitle("Erro 500");
         $view->show();

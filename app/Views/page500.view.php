@@ -1,4 +1,4 @@
-<section class="content">
+<section class="content center-page p-4">
       <div class="error-page">
         <h2 class="headline text-warning"> 500</h2>
 
@@ -7,7 +7,7 @@
 
           <p>
             We could not find the page you were looking for.
-            Meanwhile, you may <a href="../../index.html">return to dashboard</a> or try using the search form.
+            Meanwhile, you may <a href="<?=action(Controllers\Home::class)?>">return to dashboard</a> or try using the search form.
           </p>
 
           <form class="search-form">
