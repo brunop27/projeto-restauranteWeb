@@ -37,6 +37,6 @@ class Request{
     }
 
     public function getAction(){
-        return Action::createActionByUrl($this->getUrl(), $this->getMethod);
+        return Action::createActionByUrl($this->getUrl(), $this->getMethod());
     }
 }

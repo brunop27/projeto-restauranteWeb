@@ -6,11 +6,16 @@ use Core\Request;
 use Core\View;
 class Cadastro extends Controller{
     public function index(){
-        $view = new View('usuarios.cadastro','blank');
-        $view->show();
+        $view = new View('usuarios.cadastro');
+        $view->setTitle('Cadastro de Usuario')->show();
+
     }
 
-    public function salvar(Request $request){
+    public function save(Request $request){
+        pre($request->all());
+    }
+
+    public function find(Request $request){
         pre($request->all());
     }
 }

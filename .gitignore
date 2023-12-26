@@ -1,3 +1,5 @@
 vendor/
 composer.lock
+.vscode/
 app/Configs/database.php
+projeto/Modelo e Enteidade e Relacionamento do Restaurante.mwb.bak 
